@@ -17,6 +17,7 @@ build/
 .idea/
 docs/_build/
 .vscode
+.data/macro.py
 
 htmlcov/
 .coverage
