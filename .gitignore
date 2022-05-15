@@ -17,7 +17,8 @@ build/
 .idea/
 docs/_build/
 .vscode
-.data/macro.py
+/data/macro.py
+/data/a.csv
 
 htmlcov/
 .coverage
