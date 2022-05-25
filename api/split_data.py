@@ -1,7 +1,5 @@
 import json
-import settings as se
 import requests
-import responses
 import csv
 import pandas as pd
 import io
