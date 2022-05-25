@@ -1,2 +1,1 @@
-libraries/* export-ignore
-*p5.js export-ignore
+libraries/* linguist-vendored
