@@ -1,2 +1,2 @@
-libraries/ export-ignore
+libraries/* export-ignore
 *p5.js export-ignore
