@@ -1,5 +1,6 @@
 import json
-from api import *
+#from api import *
+from settings import *
 import split_data as data_utils
 import requests
 import csv
@@ -37,18 +38,20 @@ class Client:
         response        = requests.get(uurl, headers=self.headers).json()
         disruptions     = response["disruptions"]
         lines           = response["lines"]
-        new_lin         = []
-        df_dispuptions  =  data_utils.get_disruptions(disruptions)
+        df_dispuptions  = data_utils.get_disruptions(disruptions)
+        df_lines        = data_utils.get_lines(lines)
         df_dispuptions.to_csv("../data/navitia/metros/disruptions_metros.csv",index=False, sep=';')
+        df_lines.to_csv("../data/navitia/metros/lines_metros.csv",index=False, sep=';')
 
     def get_all_Bus_lines_json(self, suffix = "coverage/fr-idf/physical_modes/physical_mode:Bus/lines"):
         uurl            = self.url + suffix
         response        = requests.get(uurl, headers=self.headers).json()
         disruptions     = response["disruptions"]
         lines           = response["lines"]
-        new_lin         = []
         df_dispuptions  =  data_utils.get_disruptions(disruptions)
+        df_lines        = data_utils.get_lines(lines)
         df_dispuptions.to_csv("../data/navitia/bus/disruptions_bus.csv",index=False, sep=';')
+        df_lines.to_csv("../data/navitia/bus/lines_bus.csv",index=False, sep=';')
 
     def get_all_Tramway_lines_json(self, suffix = "coverage/fr-idf/physical_modes/physical_mode:Tramway/lines"):
         uurl            = self.url + suffix
@@ -57,7 +60,9 @@ class Client:
         lines           = response["lines"]
         new_lin         = []
         df_dispuptions  =  data_utils.get_disruptions(disruptions)
+        df_lines        = data_utils.get_lines(lines)
         df_dispuptions.to_csv("../data/navitia/tramways/disruptions_tram.csv",index=False, sep=';')
+        df_lines.to_csv("../data/navitia/tramways/lines_tramways.csv",index=False, sep=';')
 
 
     def get_all_LocalTrains_lines_json(self, suffix = "coverage/fr-idf/physical_modes/physical_mode:LocalTrain/lines"):
@@ -65,9 +70,10 @@ class Client:
         response        = requests.get(uurl, headers=self.headers).json()
         disruptions     = response["disruptions"]
         lines           = response["lines"]
-        new_lin         = []
         df_dispuptions  =  data_utils.get_disruptions(disruptions)
+        df_lines        = data_utils.get_lines(lines)
         df_dispuptions.to_csv("../data/navitia/localtrains/disruptions_localtrains.csv",index=False, sep=';')
+        df_lines.to_csv("../data/navitia/localtrains/lines_localtrains.csv",index=False, sep=';')
 
 
     def get_all_RapidTransit_lines_json(self, suffix = "coverage/fr-idf/physical_modes/physical_mode:RapidTransit/lines"):
@@ -77,7 +83,9 @@ class Client:
         lines           = response["lines"]
         new_lin         = []
         df_dispuptions  =  data_utils.get_disruptions(disruptions)
+        df_lines        = data_utils.get_lines(lines)
         df_dispuptions.to_csv("../data/navitia/rapidtransits/disruptions_rapidtransit.csv",index=False, sep=';')
+        df_lines.to_csv("../data/navitia/rapidtransits/lines_rapidtransits.csv",index=False, sep=';')
 
 
     # Get all close points

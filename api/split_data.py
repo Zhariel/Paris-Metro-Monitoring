@@ -74,3 +74,40 @@ def get_disruptions(lis):
 
     df_dispuptions  = pd.DataFrame.from_dict(new_dis)
     return df_dispuptions
+
+
+def get_lines(lis):
+    new_dis         = []
+
+    for i in lis:
+        new_dis.append(flattenjson(i, "__"))
+
+
+    for i in new_dis:
+        lis_direction_names           = []
+        lis_direction_ids             = []
+        lis_stop_areas_names          = []
+        lis_stop_areas_ids            = []
+        lis_is_frequence              = []
+        lis_direction_types           = []
+        routes                        = i["routes"]
+        nb_routes                     = len(routes)
+
+        for j in routes:
+             lis_direction_names.append(j["name"])
+             lis_direction_ids.append(j["id"])
+             lis_stop_areas_names.append(j["direction"]["stop_area"]["name"])
+             lis_stop_areas_ids.append(j["direction"]["stop_area"]["id"])
+             lis_direction_types.append(j["direction_type"])
+             lis_is_frequence.append(j["is_frequence"])
+
+        i["nb_routes"]              = nb_routes
+        i["direction_ids"]          = lis_direction_ids
+        i["direction_names"]        = lis_direction_names
+        i["stop_areas_ids"]         = lis_stop_areas_ids
+        i["stop_areas_names"]       = lis_stop_areas_names
+        i["is_frequence"]           = lis_is_frequence
+        i["direction_types"]        = lis_direction_types
+
+    df_lines  = pd.DataFrame.from_dict(new_dis)
+    return df_lines
