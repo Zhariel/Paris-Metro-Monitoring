@@ -13,79 +13,44 @@ class Client:
         self.url = URL
 
 
-    def get_regions_json(self, suffix = "coverage/"):
-        uurl        = self.url + suffix
-        response    = requests.get(uurl, headers=self.headers).json()
-        #df          = pd.DataFrame(response)
-        #print(df)
-        #df.to_csv(r'C:\Users\ASUS\Documents\M2\projet_annuel\Paris-Metro-Monitoring\data\navitia\regions.csv', index=None)
-        #print(response.json())
-
-    def get_all_disruptions_json(self, suffix = "disruptions/"):
-        uurl = self.url + suffix
-        response = requests.get(uurl, headers=self.headers)
-
-    def get_all_stop_areas_json(self, suffix = "stop_areas/"):
-        uurl = self.url + suffix
-        response = requests.get(uurl, headers=self.headers)
-
-    def get_all_lines_json(self, suffix = "lines/"):
-        uurl = self.url + suffix
-        response = requests.get(uurl, headers=self.headers)
-
-    def get_all_Metro_lines_json(self, suffix = "coverage/fr-idf/physical_modes/physical_mode:Metro/lines"):
-        uurl            = self.url + suffix
+    def factor_data(self, transportMode):
+        uurl            = self.url + "coverage/fr-idf/physical_modes/physical_mode:" + transportMode + "/lines"
         response        = requests.get(uurl, headers=self.headers).json()
         disruptions     = response["disruptions"]
         lines           = response["lines"]
         df_dispuptions  = data_utils.get_disruptions(disruptions)
         df_lines        = data_utils.get_lines(lines)
-        df_dispuptions.to_csv("../data/navitia/metros/disruptions_metros.csv",index=False, sep=';')
-        df_lines.to_csv("../data/navitia/metros/lines_metros.csv",index=False, sep=';')
 
-    def get_all_Bus_lines_json(self, suffix = "coverage/fr-idf/physical_modes/physical_mode:Bus/lines"):
-        uurl            = self.url + suffix
-        response        = requests.get(uurl, headers=self.headers).json()
-        disruptions     = response["disruptions"]
-        lines           = response["lines"]
-        df_dispuptions  =  data_utils.get_disruptions(disruptions)
-        df_lines        = data_utils.get_lines(lines)
-        df_dispuptions.to_csv("../data/navitia/bus/disruptions_bus.csv",index=False, sep=';')
-        df_lines.to_csv("../data/navitia/bus/lines_bus.csv",index=False, sep=';')
+        return df_dispuptions, df_lines
 
-    def get_all_Tramway_lines_json(self, suffix = "coverage/fr-idf/physical_modes/physical_mode:Tramway/lines"):
-        uurl            = self.url + suffix
-        response        = requests.get(uurl, headers=self.headers).json()
-        disruptions     = response["disruptions"]
-        lines           = response["lines"]
-        new_lin         = []
-        df_dispuptions  =  data_utils.get_disruptions(disruptions)
-        df_lines        = data_utils.get_lines(lines)
-        df_dispuptions.to_csv("../data/navitia/tramways/disruptions_tram.csv",index=False, sep=';')
-        df_lines.to_csv("../data/navitia/tramways/lines_tramways.csv",index=False, sep=';')
+    def df_to_csv(self, df_dispuptions, df_lines, disruptions_file, lines_file):
+        path                = "../data/navitia/"
+        disruptions_path    = path + disruptions_file
+        lines_path          = path + lines_file
+        df_dispuptions.to_csv(disruptions_path,index=False, sep=';')
+        df_lines.to_csv(lines_path,index=False, sep=';')
+
+    def get_all_Metro_lines_json(self):
+        df_dispuptions, df_lines = self.factor_data("Metro")
+        self.df_to_csv(df_dispuptions, df_lines,"metros/disruptions_metros.csv","metros/lines_metros.csv")
+
+    def get_all_Bus_lines_json(self):
+        df_dispuptions, df_lines = self.factor_data("Bus")
+        self.df_to_csv(df_dispuptions, df_lines,"bus/disruptions_bus.csv","bus/lines_bus.csv")
+
+    def get_all_Tramway_lines_json(self):
+        df_dispuptions, df_lines = self.factor_data("Tramway")
+        self.df_to_csv(df_dispuptions, df_lines,"tramways/disruptions_tram.csv","tramways/lines_tramways.csv")
 
 
-    def get_all_LocalTrains_lines_json(self, suffix = "coverage/fr-idf/physical_modes/physical_mode:LocalTrain/lines"):
-        uurl            = self.url + suffix
-        response        = requests.get(uurl, headers=self.headers).json()
-        disruptions     = response["disruptions"]
-        lines           = response["lines"]
-        df_dispuptions  =  data_utils.get_disruptions(disruptions)
-        df_lines        = data_utils.get_lines(lines)
-        df_dispuptions.to_csv("../data/navitia/localtrains/disruptions_localtrains.csv",index=False, sep=';')
-        df_lines.to_csv("../data/navitia/localtrains/lines_localtrains.csv",index=False, sep=';')
+    def get_all_LocalTrains_lines_json(self):
+        df_dispuptions, df_lines = self.factor_data("LocalTrain")
+        self.df_to_csv(df_dispuptions, df_lines,"localtrains/disruptions_localtrains.csv","localtrains/lines_localtrains.csv")
 
 
-    def get_all_RapidTransit_lines_json(self, suffix = "coverage/fr-idf/physical_modes/physical_mode:RapidTransit/lines"):
-        uurl            = self.url + suffix
-        response       = requests.get(uurl, headers=self.headers).json()
-        disruptions     = response["disruptions"]
-        lines           = response["lines"]
-        new_lin         = []
-        df_dispuptions  =  data_utils.get_disruptions(disruptions)
-        df_lines        = data_utils.get_lines(lines)
-        df_dispuptions.to_csv("../data/navitia/rapidtransits/disruptions_rapidtransit.csv",index=False, sep=';')
-        df_lines.to_csv("../data/navitia/rapidtransits/lines_rapidtransits.csv",index=False, sep=';')
+    def get_all_RapidTransit_lines_json(self):
+        df_dispuptions, df_lines = self.factor_data("RapidTransit")
+        self.df_to_csv(df_dispuptions, df_lines,"rapidtransits/disruptions_rapidtransit.csv","rapidtransits/lines_rapidtransits.csv")
 
 
     # Get all close points

@@ -4,6 +4,7 @@ import csv
 import pandas as pd
 import io
 
+# -------------------- Function to flatten json files --------------- #
 def flattenjson(b, delim):
     val = {}
     for i in b.keys():
@@ -15,6 +16,23 @@ def flattenjson(b, delim):
             val[i] = b[i]
 
     return val
+
+# --------------------- Function for the Itinerary ------------------ #
+def get_places(lis):
+    column_names    = ["id", "coord", "label", "lat", "lon"]
+    df              = pd.DataFrame(columns = column_names)
+    j               = 0
+    for i in lis:
+        coord       = i["id"]
+        label       = i["name"]
+        lat         = i["address"]["coord"]["lat"]
+        lon         = i["address"]["coord"]["lon"]
+        df2         = {'id': j, 'coord': coord, 'label': label, 'lat' : lat, 'lon' : lon}
+        df          = df.append(df2, ignore_index = True)
+        j           = j + 1
+    return df
+
+
 
 def get_disruptions(lis):
     new_dis         = []
