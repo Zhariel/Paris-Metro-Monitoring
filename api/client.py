@@ -1,3 +1,4 @@
+from curses import LINES
 import json
 from ntpath import join
 
@@ -13,18 +14,14 @@ import io
 
 class Client:
     def __init__(self):
-        self.headers = HEADERS
-        self.url_base = URL
+        self.headers: dict = HEADERS
+        self.url_base: str = URL_BASE
+        self.lines_endp: str = URL_BASE + LINES_ENDPOINT
+        self.journeys_endp: str = URL_BASE + JOURNEYS_ENDPOINT
 
-    def factor_data(self, transportMode):
-        uurl = join_path(
-            self.url_base,
-            "coverage",
-            "fr-idf",
-            "physical_modes",
-            f"physical_mode:{transportMode}",
-            "lines",
-        )
+    def factor_data(self, transport_mode):
+        uurl = self.lines_endp.replace("sample", transport_mode)
+
         response = requests.get(uurl, headers=self.headers).json()
         disruptions = response["disruptions"]
         lines = response["lines"]
