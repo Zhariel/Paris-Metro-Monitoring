@@ -10,7 +10,8 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-JSON_PATH = os.path.join('data', 'stations_list.json')
+print(os.getcwd())
+JSON_PATH = os.path.join('..', 'data', 'stations_list.json')
 
 
 @app.route('/health')
