@@ -14,20 +14,19 @@ function health(){
 
 function App() {
   const [data, setData] = useState({})
-  const size = 1225;
+  const size = 1250;
+  const station_size = 5;
   
   // health();
 
-  useEffect(()=>{
+  useEffect(() => {
     axios.get('http://127.0.0.1:5000/stations').then(response => {
-      console.log("SUCCESS", response)
-      setData(response)
+      console.log("SUCCESS", response.data)
+      setData(response.data)
     }).catch(error => {
       console.log(error)
     })
   }, [])
-
-  let stations = data.data
 
   ///////////////////
 
@@ -38,13 +37,23 @@ function App() {
   const draw = p5 => {
     p5.background(214, 222, 255)
     // p5.rect(0, 0, size, size)
-    
-    
-    if (stations === undefined  || stations.stations === undefined) return
-    stations.stations.array.forEach(element => {
-      console.log("a")
-      p5.rect(0, 0, size, size)
-    })
+
+    console.log(data.stations)
+      
+    if (data.stations === undefined  || data.stations === undefined) {
+      console.log("undefined")
+      return
+    }
+
+    data.stations.forEach(line => {
+      if(line.mode === "angles"){
+        for(let i = 0; i < line.x.length-1; i++){
+          p5.line(line.x[i]-50, line.y[i]-50, line.x[i+1]-50, line.y[i+1]-50)
+        }
+      }
+
+      // p5.circle(line.x[i]-50, line.y[i]-50, station_size, station_size)
+    });
   }
 
   return <Sketch setup={setup} draw={draw} />
