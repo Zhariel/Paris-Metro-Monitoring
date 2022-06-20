@@ -36,11 +36,17 @@ function App() {
 
   const setup = (p5, canvasParentRef) => {
     p5.createCanvas(CANVAS_SIZE, CANVAS_SIZE).parent(canvasParentRef)
+    p5.smooth();
   }
 
   const draw = p5 => {
-    p5.background(30, 30, 30)
-      
+    let col = p5.color(0, 0, 0)
+    p5.background(col)
+    // p5.background(0, 0, 0, 0.6)
+    p5.noFill()
+    p5.stroke('#050054');
+    p5.rect(0, 0, CANVAS_SIZE, CANVAS_SIZE)
+    
     if (data.stations === undefined  || data.stations === undefined) {
       console.log("undefined")
       return
@@ -62,7 +68,7 @@ function App() {
       }
       else{
         for(let i = 0; i < line.x.length-1; i++){
-          if(line.x[i] === "-") return
+          // if(line.x[i] === "-") continue
           p5.circle(
             (line.x[i]-OFFSET_X)*SCALING_FACTOR, 
             (line.y[i]-OFFSET_Y)*SCALING_FACTOR, 
@@ -73,7 +79,12 @@ function App() {
     });
   }
 
-  return <Sketch setup={setup} draw={draw} />
+  return (
+  <>
+    <Sketch setup={setup} draw={draw} />
+    {/* <div class="background"></div> */}
+  </>
+  )
 }
 
 export default App;
