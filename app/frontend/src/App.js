@@ -14,8 +14,12 @@ function health(){
 
 function App() {
   const [data, setData] = useState({})
-  const size = 1250;
-  const station_size = 5;
+  const SCALING_FACTOR = 0.9;
+  const CANVAS_SIZE = 1250*SCALING_FACTOR;
+  const STATION_SIZE = 5;
+  const STROKE_WEIGHT = 4;
+  const OFFSET_Y = 120
+  const OFFSET_X = 60
   
   // health();
 
@@ -31,14 +35,11 @@ function App() {
   ///////////////////
 
   const setup = (p5, canvasParentRef) => {
-    p5.createCanvas(size, size).parent(canvasParentRef)
+    p5.createCanvas(CANVAS_SIZE, CANVAS_SIZE).parent(canvasParentRef)
   }
 
   const draw = p5 => {
-    p5.background(214, 222, 255)
-    // p5.rect(0, 0, size, size)
-
-    console.log(data.stations)
+    p5.background(30, 30, 30)
       
     if (data.stations === undefined  || data.stations === undefined) {
       console.log("undefined")
@@ -47,12 +48,28 @@ function App() {
 
     data.stations.forEach(line => {
       if(line.mode === "angles"){
+        let c = p5.color(line.rgb[0], line.rgb[1], line.rgb[2])
+        p5.strokeWeight(STROKE_WEIGHT)
+        p5.stroke(c)
+        
         for(let i = 0; i < line.x.length-1; i++){
-          p5.line(line.x[i]-50, line.y[i]-50, line.x[i+1]-50, line.y[i+1]-50)
+          p5.line(
+            (line.x[i]-OFFSET_X)*SCALING_FACTOR, 
+            (line.y[i]-OFFSET_Y)*SCALING_FACTOR, 
+            (line.x[i+1]-OFFSET_X)*SCALING_FACTOR, 
+            (line.y[i+1]-OFFSET_Y)*SCALING_FACTOR)
         }
       }
-
-      // p5.circle(line.x[i]-50, line.y[i]-50, station_size, station_size)
+      else{
+        for(let i = 0; i < line.x.length-1; i++){
+          if(line.x[i] === "-") return
+          p5.circle(
+            (line.x[i]-OFFSET_X)*SCALING_FACTOR, 
+            (line.y[i]-OFFSET_Y)*SCALING_FACTOR, 
+            STATION_SIZE*SCALING_FACTOR, 
+            STATION_SIZE*SCALING_FACTOR)
+        }
+      }
     });
   }
 
