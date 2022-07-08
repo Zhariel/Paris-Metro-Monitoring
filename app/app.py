@@ -23,8 +23,6 @@ def health():
 def stations():
     file = open(JSON_PATH)
     json_object = (json.load(file))
-    print(type(json_object))
-    # print(json_object)
 
     return json_object
 
