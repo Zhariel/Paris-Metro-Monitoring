@@ -9,4 +9,6 @@ load_dotenv(dotenv_path)
 HEADERS = {
     'Authorization' : os.getenv('AUTH_TOKEN')
 }
-URL = os.getenv('URL')
+URL_BASE = os.getenv('URL')
+LINES_ENDPOINT = os.getenv('LINES_ENDPOINT')
+JOURNEYS_ENDPOINT = os.getenv('JOURNEYS_ENDPOINT')
