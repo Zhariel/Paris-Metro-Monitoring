@@ -2,7 +2,7 @@ import json
 # from api import *
 from utils import join_path
 from settings import *
-import split_data as data_utils
+import split_data
 import pandas as pd
 import requests
 import csv
@@ -25,8 +25,8 @@ class Client:
         response = requests.get(uurl, headers=self.headers).json()
         disruptions = response["disruptions"]
         lines = response["lines"]
-        df_disruptions = data_utils.get_disruptions(disruptions)
-        df_lines = data_utils.get_lines(lines)
+        df_disruptions = split_data.get_disruptions(disruptions)
+        df_lines = split_data.get_lines(lines)
 
         return df_disruptions, df_lines
 
