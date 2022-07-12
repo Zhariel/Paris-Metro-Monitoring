@@ -45,6 +45,7 @@ class Client:
             join_path("metros", "disruptions_metros.csv"),
             join_path("metros", "lines_metros.csv"),
         )
+        return df_lines
 
     def get_all_Bus_lines_json(self):
         df_disruptions, df_lines = self.factor_data("Bus")
@@ -63,6 +64,7 @@ class Client:
             join_path("tramways", "disruptions_tram.csv"),
             join_path("tramways", "lines_tramways.csv"),
         )
+        return df_lines
 
     def get_all_LocalTrains_lines_json(self):
         df_disruptions, df_lines = self.factor_data("LocalTrain")
@@ -72,6 +74,7 @@ class Client:
             join_path("localtrains", "disruptions_localtrains.csv"),
             join_path("localtrains", "lines_localtrains.csv"),
         )
+        return df_lines
 
     def get_all_RapidTransit_lines_json(self):
         df_disruptions, df_lines = self.factor_data("RapidTransit")
@@ -81,6 +84,7 @@ class Client:
             join_path("rapidtransits", "disruptions_rapidtransit.csv"),
             join_path("rapidtransits", "lines_rapidtransits.csv"),
         )
+        return df_lines
 
     # Get all close points
     def get_all_pois_json(self, suffix="pois/"):
@@ -90,6 +94,23 @@ class Client:
     def get_all_poi_types_json(self, suffix="poi_types/"):
         uurl = self.url_base + suffix
         response = requests.get(uurl, headers=self.headers)
+        
+"""    #Get all stops
+    def get_all_stops(self):
+        metro_lines = self.get_all_Tramway_lines_json()
+        j = 1
+        for index, i in metro_lines.iterrows():
+            print(i["code"])
+            url_line = self.lines_endp.replace("sample", "Tramway") + "/"+i["id"] +"/stop_areas"
+            response = requests.get(url_line, headers=self.headers).json()
+            stops = response["stop_areas"]
+            list_stops = []
+            print(j)
+            for i in stops:
+                list_stops.append(i["name"])
+            print(list_stops)
+            j = j+1"""
+        
 
 
 client = Client()

@@ -39,7 +39,7 @@ class Itinerary:
         id_destination = self.get_address(destination).iloc[0]["coord"]
         print(id_destination)
 
-        arg = "?from=" + id_departure + "&to=" + id_destination
+        arg = "journeys?from=" + id_departure + "&to=" + id_destination
         response = self.send_request(arg)
         journeys = response["journeys"]
         possible_journeys = data_utils.format_itinararies(journeys)
