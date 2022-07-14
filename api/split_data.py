@@ -130,7 +130,7 @@ def format_itinararies(lis):
         walking_duration = i["durations"]["walking"]
         arrival_date_time = i["arrival_date_time"]
         departure_date_time = i["departure_date_time"]
-        fare_value = i["fare"]["total"]["value"]
+        fare_value = i["fare"]["total"]["value"] if ("total" in i["fare"]) else 0.0
         co2_emission_value = i["co2_emission"]["value"]
         type = i["type"]
         duration = int(i["duration"]) / 60
@@ -146,64 +146,35 @@ def format_itinararies(lis):
 
     return df
 
-
 def get_disruptions(lis):
-    new_dis = []
-
+    
+    head = 'status', 'category', 'severity_priority', 'severity_name', 'severity_effect', 'begin_date', 'end_date', 'impact_id', 'messages', 'updated_at', 'impacted_objects', 'id', 'cause'
+    column_names = ['status', 'category', 'severity_priority', 'severity_name', 'severity_effect', 'begin_date', 'end_date', 'impact_id', 'messages', 'updated_at', 'impacted_objects', 'id', 'cause']
+    df_disruptions = pd.DataFrame(columns=column_names)
+    
     for i in lis:
-        new_dis.append(flattenjson(i, "__"))
-
-    for i in new_dis:
-        lis_mes = []
-        lis_embed_types = []
-        lis_line_codes = []
-        lis_line_names = []
-        lis_line_phys = []
-        lis_commercial_mode = []
-        lis_stop_values = []
-        lis_stop_names = []
-        lis_stop_labels = []
-        # pt_object           = i['impacted_objects'][0]['pt_object']
-        pt_object = i['impacted_objects']
-        for j in pt_object:
-            lis_embed_types.append(j['pt_object']['embedded_type'])
-            try:
-                line = j['pt_object']['line']
-                lis_line_codes.append(line['code'])
-                lis_line_names.append(line['name'])
-                lis_line_phys.append(line['physical_modes'])
-                lis_commercial_mode.append(line['lis_commercial_mode']['name'])
-            except:
-                lis_line_codes.append("")
-                lis_line_names.append("")
-                lis_line_phys.append("")
-                lis_commercial_mode.append("")
-
-            try:
-                stop_area = j['pt_object']['stop_area']
-                lis_stop_values.append(stop_area['codes'][0]['value'])
-                lis_stop_names.append(stop_area['name'])
-                lis_stop_labels.append(stop_area['label'])
-            except:
-                lis_stop_values.append("")
-                lis_stop_names.append("")
-                lis_stop_labels.append("")
-
-        i['embedded_type'] = lis_embed_types
-        i['line_code'] = lis_line_codes
-        i['line_name'] = lis_line_names
-        i['line_physical_mode'] = lis_line_phys
-        i['line_commecial_mode'] = lis_commercial_mode
-        i['stop_area_value'] = lis_stop_values
-        i['stop_area_name'] = lis_stop_names
-        i['stop_area_label'] = lis_stop_labels
-
-        messages = i["messages"]
-        for j in messages:
-            lis_mes.append(j["text"])
-        i["messages"] = lis_mes
-
-    df_disruptions = pd.DataFrame.from_dict(new_dis)
+        messages = ""
+        for j in i["messages"]:
+            messages = messages + " / " + j["text"]
+        for j in i["application_periods"]:
+            rawdata = []
+            rawdata.append(i["status"])
+            rawdata.append(i["category"])
+            rawdata.append(i["severity"]["priority"])
+            rawdata.append(i["severity"]["name"])
+            rawdata.append(i["severity"]["effect"])
+            rawdata.append(j["begin"])
+            rawdata.append(j["end"])
+            rawdata.append(i["impact_id"])
+            rawdata.append(messages)
+            rawdata.append(i["updated_at"])
+            rawdata.append(i["impacted_objects"][0]["pt_object"]["name"])
+            rawdata.append(i["id"])
+            rawdata.append(i["cause"])
+            
+            df_2 = {'status' : rawdata[0], 'category' : rawdata[1], 'severity_priority' : rawdata[2], 'severity_name' : rawdata[3], 'severity_effect' : rawdata[4], 'begin_date' : rawdata[5], 'end_date' : rawdata[6], 'impact_id' : rawdata[7], 'messages' : rawdata[8], 'updated_at' : rawdata[9], 'impacted_objects' : rawdata[10], 'id' : rawdata[11], 'cause' : rawdata[12]}
+            df_disruptions = df_disruptions.append(df_2, ignore_index = True)
+            
     return df_disruptions
 
 

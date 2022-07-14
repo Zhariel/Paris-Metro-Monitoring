@@ -95,27 +95,11 @@ class Client:
         uurl = self.url_base + suffix
         response = requests.get(uurl, headers=self.headers)
         
-"""    #Get all stops
-    def get_all_stops(self):
-        metro_lines = self.get_all_Tramway_lines_json()
-        j = 1
-        for index, i in metro_lines.iterrows():
-            print(i["code"])
-            url_line = self.lines_endp.replace("sample", "Tramway") + "/"+i["id"] +"/stop_areas"
-            response = requests.get(url_line, headers=self.headers).json()
-            stops = response["stop_areas"]
-            list_stops = []
-            print(j)
-            for i in stops:
-                list_stops.append(i["name"])
-            print(list_stops)
-            j = j+1"""
-        
 
 
 client = Client()
-client.get_all_Metro_lines_json()
-client.get_all_Bus_lines_json()
-client.get_all_Tramway_lines_json()
-client.get_all_LocalTrains_lines_json()
-client.get_all_RapidTransit_lines_json()
+#client.get_all_Metro_lines_json()
+#client.get_all_Bus_lines_json()
+#client.get_all_Tramway_lines_json()
+#client.get_all_LocalTrains_lines_json()
+#client.get_all_RapidTransit_lines_json()
