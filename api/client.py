@@ -45,6 +45,7 @@ class NavitiaClient:
             join_path("metros", "disruptions_metros.csv"),
             join_path("metros", "lines_metros.csv"),
         )
+        return df_lines
 
     def get_all_Bus_lines_json(self):
         df_disruptions, df_lines = self.factor_data("Bus")
@@ -63,6 +64,7 @@ class NavitiaClient:
             join_path("tramways", "disruptions_tram.csv"),
             join_path("tramways", "lines_tramways.csv"),
         )
+        return df_lines
 
     def get_all_LocalTrains_lines_json(self):
         df_disruptions, df_lines = self.factor_data("LocalTrain")
@@ -72,6 +74,7 @@ class NavitiaClient:
             join_path("localtrains", "disruptions_localtrains.csv"),
             join_path("localtrains", "lines_localtrains.csv"),
         )
+        return df_lines
 
     def get_all_RapidTransit_lines_json(self):
         df_disruptions, df_lines = self.factor_data("RapidTransit")
@@ -81,6 +84,7 @@ class NavitiaClient:
             join_path("rapidtransits", "disruptions_rapidtransit.csv"),
             join_path("rapidtransits", "lines_rapidtransits.csv"),
         )
+        return df_lines
 
     # Get all close points
     def get_all_pois_json(self, suffix="pois/"):
