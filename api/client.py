@@ -1,14 +1,14 @@
 import json
 # from api import *
-from utils import join_path
-from settings import *
-import split_data
+from api.utils import join_path
+from api.settings import *
+from api.split_data import get_disruptions, get_lines
 import pandas as pd
 import requests
 import csv
 
 
-class Client:
+class NavitiaClient:
     def __init__(self):
         self.headers: dict = HEADERS
         self.url_base: str = URL_BASE
@@ -25,8 +25,8 @@ class Client:
         response = requests.get(uurl, headers=self.headers).json()
         disruptions = response["disruptions"]
         lines = response["lines"]
-        df_disruptions = split_data.get_disruptions(disruptions)
-        df_lines = split_data.get_lines(lines)
+        df_disruptions = get_disruptions(disruptions)
+        df_lines = get_lines(lines)
 
         return df_disruptions, df_lines
 
@@ -90,11 +90,3 @@ class Client:
     def get_all_poi_types_json(self, suffix="poi_types/"):
         uurl = self.url_base + suffix
         response = requests.get(uurl, headers=self.headers)
-
-
-client = Client()
-client.get_all_Metro_lines_json()
-client.get_all_Bus_lines_json()
-client.get_all_Tramway_lines_json()
-client.get_all_LocalTrains_lines_json()
-client.get_all_RapidTransit_lines_json()

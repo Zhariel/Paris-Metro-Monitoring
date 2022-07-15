@@ -39,7 +39,6 @@ def create_sections_json(lis):
     j = 0
     sections_dict = {}
     for i in lis:
-        print("section " + str(j))
         stops = []
         if i["type"] == "public_transport":
             mode = i["display_informations"]["physical_mode"]
@@ -116,35 +115,64 @@ def extract_info_street(section):
 
 
 # --------------------- Function for the Itinerary ------------------ #
-def format_itinararies(lis):
+def format_itineraries(journeys_list):
+    '''
+    :param journeys_list: list of journeys sent by Navitia
+    :return: list of dict journeys
+    '''
     # The unit of fare value is Euro
     # The unit of CO2 emission is gEC
-    column_names = ["id", "nb_transfers", "walking_duration", "arrival_date_time", "departure_date_time", "fare_value",
-                    "co2_emission_value", "type", "duration", "nb_sections", "sections"]
-    df = pd.DataFrame(columns=column_names)
-    j = 0
-    for i in lis:
-        print("journey" + str(j))
-        id = j
-        nb_transfers = i["nb_transfers"]
-        walking_duration = i["durations"]["walking"]
-        arrival_date_time = i["arrival_date_time"]
-        departure_date_time = i["departure_date_time"]
-        fare_value = i["fare"]["total"]["value"]
-        co2_emission_value = i["co2_emission"]["value"]
-        type = i["type"]
-        duration = int(i["duration"]) / 60
-        nb_sections = len(i["sections"])
-        sections = create_sections_json(i["sections"])
-        df2 = {'id': id, 'nb_transfers': nb_transfers, 'walking_duration': walking_duration,
-               'arrival_date_time': arrival_date_time, "departure_date_time": departure_date_time,
-               "fare_value": fare_value,
-               "co2_emission_value": co2_emission_value, "type": type, "duration": duration, "nb_sections": nb_sections,
-               "sections": sections}
-        df = df.append(df2, ignore_index=True)
-        j = j + 1
+    journeys_with_metadata = {}
 
-    return df
+    count = 0
+    for itinerary in journeys_list:
+        journey = {"metadata": {}}
+        journey["metadata"]["nb_transfers"] = itinerary["nb_transfers"]
+        journey["metadata"]["walking_duration"] = itinerary["durations"]["walking"]
+        journey["metadata"]["arrival_date_time"] = itinerary["arrival_date_time"]
+        journey["metadata"]["departure_date_time"] = itinerary["departure_date_time"]
+        journey["metadata"]["fare_value"] = itinerary["fare"]["total"]["value"]
+        journey["metadata"]["co2_emission_value"] = itinerary["co2_emission"]["value"]
+        journey["metadata"]["type"] = itinerary["type"]
+        journey["metadata"]["duration"] = int(itinerary["duration"]) / 60
+        journey["metadata"]["nb_sections"] = len(itinerary["sections"])
+
+        journey["sections"] = create_sections_json(itinerary["sections"])
+
+        journeys_with_metadata[count] = journey
+
+        count += 1
+    return journeys_with_metadata
+
+# def format_itinararies(lis):
+#     # The unit of fare value is Euro
+#     # The unit of CO2 emission is gEC
+#     column_names = ["id", "nb_transfers", "walking_duration", "arrival_date_time", "departure_date_time", "fare_value",
+#                     "co2_emission_value", "type", "duration", "nb_sections", "sections"]
+#     df = pd.DataFrame(columns=column_names)
+#     j = 0
+#     for i in lis:
+#         print("journey" + str(j))
+#         id = j
+#         nb_transfers = i["nb_transfers"]
+#         walking_duration = i["durations"]["walking"]
+#         arrival_date_time = i["arrival_date_time"]
+#         departure_date_time = i["departure_date_time"]
+#         fare_value = i["fare"]["total"]["value"]
+#         co2_emission_value = i["co2_emission"]["value"]
+#         type = i["type"]
+#         duration = int(i["duration"]) / 60
+#         nb_sections = len(i["sections"])
+#         sections = create_sections_json(i["sections"])
+#         df2 = {'id': id, 'nb_transfers': nb_transfers, 'walking_duration': walking_duration,
+#                'arrival_date_time': arrival_date_time, "departure_date_time": departure_date_time,
+#                "fare_value": fare_value,
+#                "co2_emission_value": co2_emission_value, "type": type, "duration": duration, "nb_sections": nb_sections,
+#                "sections": sections}
+#         df = df.append(df2, ignore_index=True)
+#         j = j + 1
+#
+#     return df
 
 
 def get_disruptions(lis):
