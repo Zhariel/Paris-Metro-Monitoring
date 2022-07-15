@@ -1,0 +1,811 @@
+{
+    "0":{
+       "metadata":{
+          "nb_transfers":1,
+          "walking_duration":1826,
+          "arrival_date_time":"20220712T195649",
+          "departure_date_time":"20220712T184923",
+          "fare_value":"500.0",
+          "co2_emission_value":63.4268,
+          "type":"best",
+          "duration":67.43333333333334,
+          "nb_sections":6
+       },
+       "sections":{
+          "0":{
+             "type":"street_network",
+             "mode":"walking",
+             "info":{
+                "code":"",
+                "duration":21.616666666666667,
+                "departure_date_time":"20220712T184923",
+                "arrival_date_time":"20220712T191100",
+                "from":"108 Rue Perthuis",
+                "to":"Issy",
+                "stops":[
+                   
+                ]
+             }
+          },
+          "1":{
+             "type":"public_transport",
+             "mode":"RER",
+             "info":{
+                "code":"C",
+                "duration":15.0,
+                "departure_date_time":"20220712T191100",
+                "arrival_date_time":"20220712T192600",
+                "from":"Issy",
+                "to":"Invalides",
+                "stops":[
+                   "Issy",
+                   "Issy Val de Seine",
+                   "Pont du Garigliano - Hôpital Européen G. Pompidou",
+                   "Javel",
+                   "Champ de Mars Tour Eiffel",
+                   "Pont de l'Alma",
+                   "Invalides"
+                ]
+             }
+          },
+          "2":{
+             "type":"transfer",
+             "mode":"transfer of transport",
+             "info":{
+                "code":"",
+                "duration":4.0,
+                "departure_date_time":"20220712T192600",
+                "arrival_date_time":"20220712T193000",
+                "from":"Invalides",
+                "to":"Invalides",
+                "stops":[
+                   
+                ]
+             }
+          },
+          "3":{
+             "type":"waiting",
+             "mode":"waiting",
+             "info":{
+                "code":"",
+                "duration":3.0,
+                "departure_date_time":"20220712T193000",
+                "arrival_date_time":"20220712T193300",
+                "from":"",
+                "to":"",
+                "stops":[
+                   
+                ]
+             }
+          },
+          "4":{
+             "type":"public_transport",
+             "mode":"Métro",
+             "info":{
+                "code":"8",
+                "duration":19.0,
+                "departure_date_time":"20220712T193300",
+                "arrival_date_time":"20220712T195200",
+                "from":"Invalides",
+                "to":"Reuilly - Diderot",
+                "stops":[
+                   "Invalides",
+                   "Concorde",
+                   "Madeleine",
+                   "Opéra",
+                   "Richelieu - Drouot",
+                   "Grands Boulevards",
+                   "Bonne Nouvelle",
+                   "Strasbourg - Saint-Denis",
+                   "République",
+                   "Filles du Calvaire",
+                   "Saint-Sébastien - Froissart",
+                   "Chemin Vert",
+                   "Bastille",
+                   "Ledru-Rollin",
+                   "Faidherbe - Chaligny",
+                   "Reuilly - Diderot"
+                ]
+             },
+             "x":[
+                "417",
+                "434",
+                "445",
+                "609",
+                "655",
+                "716",
+                "749",
+                "818",
+                "819",
+                "824",
+                "854",
+                "909",
+                "936"
+             ],
+             "y":[
+                775.0,
+                723.0,
+                684.0,
+                623.0,
+                624.0,
+                625.0,
+                624.0,
+                696.0,
+                762.0,
+                795.0,
+                824.0,
+                848.0,
+                874.0
+             ]
+          },
+          "5":{
+             "type":"street_network",
+             "mode":"walking",
+             "info":{
+                "code":"",
+                "duration":4.816666666666666,
+                "departure_date_time":"20220712T195200",
+                "arrival_date_time":"20220712T195649",
+                "from":"Reuilly - Diderot",
+                "to":"242 Rue du Faubourg Saint-Antoine",
+                "stops":[
+                   
+                ]
+             }
+          }
+       }
+    },
+    "1":{
+       "metadata":{
+          "nb_transfers":1,
+          "walking_duration":1715,
+          "arrival_date_time":"20220712T200054",
+          "departure_date_time":"20220712T190219",
+          "fare_value":"500.0",
+          "co2_emission_value":153.2163,
+          "type":"fastest",
+          "duration":58.583333333333336,
+          "nb_sections":6
+       },
+       "sections":{
+          "0":{
+             "type":"street_network",
+             "mode":"walking",
+             "info":{
+                "code":"",
+                "duration":16.683333333333334,
+                "departure_date_time":"20220712T190219",
+                "arrival_date_time":"20220712T191900",
+                "from":"108 Rue Perthuis",
+                "to":"Clamart",
+                "stops":[
+                   
+                ]
+             }
+          },
+          "1":{
+             "type":"public_transport",
+             "mode":"Train Transilien",
+             "info":{
+                "code":"N",
+                "duration":7.0,
+                "departure_date_time":"20220712T191900",
+                "arrival_date_time":"20220712T192600",
+                "from":"Clamart",
+                "to":"Gare Montparnasse",
+                "stops":[
+                   "Clamart",
+                   "Vanves - Malakoff",
+                   "Gare Montparnasse"
+                ]
+             }
+          },
+          "2":{
+             "type":"transfer",
+             "mode":"transfer of transport",
+             "info":{
+                "code":"",
+                "duration":4.0,
+                "departure_date_time":"20220712T192600",
+                "arrival_date_time":"20220712T193000",
+                "from":"Gare Montparnasse",
+                "to":"Montparnasse Bienvenue",
+                "stops":[
+                   
+                ]
+             }
+          },
+          "3":{
+             "type":"waiting",
+             "mode":"waiting",
+             "info":{
+                "code":"",
+                "duration":2.0,
+                "departure_date_time":"20220712T193000",
+                "arrival_date_time":"20220712T193200",
+                "from":"",
+                "to":"",
+                "stops":[
+                   
+                ]
+             }
+          },
+          "4":{
+             "type":"public_transport",
+             "mode":"Métro",
+             "info":{
+                "code":"6",
+                "duration":21.0,
+                "departure_date_time":"20220712T193200",
+                "arrival_date_time":"20220712T195300",
+                "from":"Montparnasse Bienvenue",
+                "to":"Nation",
+                "stops":[
+                   "Montparnasse Bienvenue",
+                   "Edgar Quinet",
+                   "Raspail",
+                   "Denfert-Rochereau",
+                   "Saint-Jacques",
+                   "Glacière",
+                   "Corvisart",
+                   "Place d'Italie",
+                   "Nationale",
+                   "Chevaleret",
+                   "Quai de la Gare",
+                   "Bercy",
+                   "Dugommier",
+                   "Daumesnil",
+                   "Bel-Air",
+                   "Picpus",
+                   "Nation"
+                ]
+             },
+             "x":[
+                "553",
+                "580",
+                "628",
+                "654",
+                "676",
+                "747",
+                "772",
+                "819",
+                "859",
+                "899",
+                "940",
+                "968",
+                "996",
+                "1020",
+                "1042",
+                "1002"
+             ],
+             "y":[
+                975.0,
+                976.0,
+                988.0,
+                1011.0,
+                1035.0,
+                1051.0,
+                1049.0,
+                1051.0,
+                1052.0,
+                1033.0,
+                989.0,
+                964.0,
+                934.0,
+                911.0,
+                889.0,
+                843.0
+             ]
+          },
+          "5":{
+             "type":"street_network",
+             "mode":"walking",
+             "info":{
+                "code":"",
+                "duration":7.9,
+                "departure_date_time":"20220712T195300",
+                "arrival_date_time":"20220712T200054",
+                "from":"Nation",
+                "to":"242 Rue du Faubourg Saint-Antoine",
+                "stops":[
+                   
+                ]
+             }
+          }
+       }
+    },
+    "2":{
+       "metadata":{
+          "nb_transfers":2,
+          "walking_duration":1137,
+          "arrival_date_time":"20220712T200054",
+          "departure_date_time":"20220712T185735",
+          "fare_value":"690.0",
+          "co2_emission_value":418.8003,
+          "type":"rapid",
+          "duration":63.31666666666667,
+          "nb_sections":9
+       },
+       "sections":{
+          "0":{
+             "type":"street_network",
+             "mode":"walking",
+             "info":{
+                "code":"",
+                "duration":3.4166666666666665,
+                "departure_date_time":"20220712T185735",
+                "arrival_date_time":"20220712T190100",
+                "from":"108 Rue Perthuis",
+                "to":"Fleury",
+                "stops":[
+                   
+                ]
+             }
+          },
+          "1":{
+             "type":"public_transport",
+             "mode":"Bus",
+             "info":{
+                "code":"169",
+                "duration":9.0,
+                "departure_date_time":"20220712T190100",
+                "arrival_date_time":"20220712T191000",
+                "from":"Fleury",
+                "to":"Gare de Clamart",
+                "stops":[
+                   "Fleury",
+                   "Hôpital Percy",
+                   "Épinettes",
+                   "Défense - Egalité",
+                   "Verdi",
+                   "Émile Duployé",
+                   "Gare de Clamart"
+                ]
+             }
+          },
+          "2":{
+             "type":"transfer",
+             "mode":"transfer of transport",
+             "info":{
+                "code":"",
+                "duration":3.6333333333333333,
+                "departure_date_time":"20220712T191000",
+                "arrival_date_time":"20220712T191338",
+                "from":"Gare de Clamart",
+                "to":"Clamart",
+                "stops":[
+                   
+                ]
+             }
+          },
+          "3":{
+             "type":"waiting",
+             "mode":"waiting",
+             "info":{
+                "code":"",
+                "duration":5.366666666666666,
+                "departure_date_time":"20220712T191338",
+                "arrival_date_time":"20220712T191900",
+                "from":"",
+                "to":"",
+                "stops":[
+                   
+                ]
+             }
+          },
+          "4":{
+             "type":"public_transport",
+             "mode":"Train Transilien",
+             "info":{
+                "code":"N",
+                "duration":7.0,
+                "departure_date_time":"20220712T191900",
+                "arrival_date_time":"20220712T192600",
+                "from":"Clamart",
+                "to":"Gare Montparnasse",
+                "stops":[
+                   "Clamart",
+                   "Vanves - Malakoff",
+                   "Gare Montparnasse"
+                ]
+             }
+          },
+          "5":{
+             "type":"transfer",
+             "mode":"transfer of transport",
+             "info":{
+                "code":"",
+                "duration":4.0,
+                "departure_date_time":"20220712T192600",
+                "arrival_date_time":"20220712T193000",
+                "from":"Gare Montparnasse",
+                "to":"Montparnasse Bienvenue",
+                "stops":[
+                   
+                ]
+             }
+          },
+          "6":{
+             "type":"waiting",
+             "mode":"waiting",
+             "info":{
+                "code":"",
+                "duration":2.0,
+                "departure_date_time":"20220712T193000",
+                "arrival_date_time":"20220712T193200",
+                "from":"",
+                "to":"",
+                "stops":[
+                   
+                ]
+             }
+          },
+          "7":{
+             "type":"public_transport",
+             "mode":"Métro",
+             "info":{
+                "code":"6",
+                "duration":21.0,
+                "departure_date_time":"20220712T193200",
+                "arrival_date_time":"20220712T195300",
+                "from":"Montparnasse Bienvenue",
+                "to":"Nation",
+                "stops":[
+                   "Montparnasse Bienvenue",
+                   "Edgar Quinet",
+                   "Raspail",
+                   "Denfert-Rochereau",
+                   "Saint-Jacques",
+                   "Glacière",
+                   "Corvisart",
+                   "Place d'Italie",
+                   "Nationale",
+                   "Chevaleret",
+                   "Quai de la Gare",
+                   "Bercy",
+                   "Dugommier",
+                   "Daumesnil",
+                   "Bel-Air",
+                   "Picpus",
+                   "Nation"
+                ]
+             },
+             "x":[
+                "553",
+                "580",
+                "628",
+                "654",
+                "676",
+                "747",
+                "772",
+                "819",
+                "859",
+                "899",
+                "940",
+                "968",
+                "996",
+                "1020",
+                "1042",
+                "1002"
+             ],
+             "y":[
+                975.0,
+                976.0,
+                988.0,
+                1011.0,
+                1035.0,
+                1051.0,
+                1049.0,
+                1051.0,
+                1052.0,
+                1033.0,
+                989.0,
+                964.0,
+                934.0,
+                911.0,
+                889.0,
+                843.0
+             ]
+          },
+          "8":{
+             "type":"street_network",
+             "mode":"walking",
+             "info":{
+                "code":"",
+                "duration":7.9,
+                "departure_date_time":"20220712T195300",
+                "arrival_date_time":"20220712T200054",
+                "from":"Nation",
+                "to":"242 Rue du Faubourg Saint-Antoine",
+                "stops":[
+                   
+                ]
+             }
+          }
+       }
+    },
+    "3":{
+       "metadata":{
+          "nb_transfers":3,
+          "walking_duration":896,
+          "arrival_date_time":"20220712T200302",
+          "departure_date_time":"20220712T185735",
+          "fare_value":"380.0",
+          "co2_emission_value":428.397,
+          "type":"less_fallback_walk",
+          "duration":65.45,
+          "nb_sections":12
+       },
+       "sections":{
+          "0":{
+             "type":"street_network",
+             "mode":"walking",
+             "info":{
+                "code":"",
+                "duration":3.4166666666666665,
+                "departure_date_time":"20220712T185735",
+                "arrival_date_time":"20220712T190100",
+                "from":"108 Rue Perthuis",
+                "to":"Fleury",
+                "stops":[
+                   
+                ]
+             }
+          },
+          "1":{
+             "type":"public_transport",
+             "mode":"Bus",
+             "info":{
+                "code":"169",
+                "duration":14.0,
+                "departure_date_time":"20220712T190100",
+                "arrival_date_time":"20220712T191500",
+                "from":"Fleury",
+                "to":"Musée",
+                "stops":[
+                   "Fleury",
+                   "Hôpital Percy",
+                   "Épinettes",
+                   "Défense - Egalité",
+                   "Verdi",
+                   "Émile Duployé",
+                   "Gare de Clamart",
+                   "Général de Gaulle",
+                   "Rue du Fort",
+                   "Musée"
+                ]
+             }
+          },
+          "2":{
+             "type":"transfer",
+             "mode":"transfer of transport",
+             "info":{
+                "code":"",
+                "duration":3.1333333333333333,
+                "departure_date_time":"20220712T191500",
+                "arrival_date_time":"20220712T191808",
+                "from":"Musée",
+                "to":"Mairie d'Issy",
+                "stops":[
+                   
+                ]
+             }
+          },
+          "3":{
+             "type":"waiting",
+             "mode":"waiting",
+             "info":{
+                "code":"",
+                "duration":2.8666666666666667,
+                "departure_date_time":"20220712T191808",
+                "arrival_date_time":"20220712T192100",
+                "from":"",
+                "to":"",
+                "stops":[
+                   
+                ]
+             }
+          },
+          "4":{
+             "type":"public_transport",
+             "mode":"Métro",
+             "info":{
+                "code":"12",
+                "duration":8.0,
+                "departure_date_time":"20220712T192100",
+                "arrival_date_time":"20220712T192900",
+                "from":"Mairie d'Issy",
+                "to":"Pasteur",
+                "stops":[
+                   "Mairie d'Issy",
+                   "Corentin Celton",
+                   "Porte de Versailles",
+                   "Convention",
+                   "Vaugirard",
+                   "Volontaires",
+                   "Pasteur"
+                ]
+             },
+             "x":[
+                "491",
+                "458",
+                "427",
+                "398",
+                "323",
+                "298"
+             ],
+             "y":[
+                974.0,
+                1010.0,
+                1040.0,
+                1070.0,
+                1144.0,
+                1169.0
+             ]
+          },
+          "5":{
+             "type":"transfer",
+             "mode":"transfer of transport",
+             "info":{
+                "code":"",
+                "duration":1.35,
+                "departure_date_time":"20220712T192900",
+                "arrival_date_time":"20220712T193021",
+                "from":"Pasteur",
+                "to":"Pasteur",
+                "stops":[
+                   
+                ]
+             }
+          },
+          "6":{
+             "type":"waiting",
+             "mode":"waiting",
+             "info":{
+                "code":"",
+                "duration":2.65,
+                "departure_date_time":"20220712T193021",
+                "arrival_date_time":"20220712T193300",
+                "from":"",
+                "to":"",
+                "stops":[
+                   
+                ]
+             }
+          },
+          "7":{
+             "type":"public_transport",
+             "mode":"Métro",
+             "info":{
+                "code":"6",
+                "duration":18.0,
+                "departure_date_time":"20220712T193300",
+                "arrival_date_time":"20220712T195100",
+                "from":"Pasteur",
+                "to":"Daumesnil",
+                "stops":[
+                   "Pasteur",
+                   "Montparnasse Bienvenue",
+                   "Edgar Quinet",
+                   "Raspail",
+                   "Denfert-Rochereau",
+                   "Saint-Jacques",
+                   "Glacière",
+                   "Corvisart",
+                   "Place d'Italie",
+                   "Nationale",
+                   "Chevaleret",
+                   "Quai de la Gare",
+                   "Bercy",
+                   "Dugommier",
+                   "Daumesnil"
+                ]
+             },
+             "x":[
+                "491",
+                "553",
+                "580",
+                "628",
+                "654",
+                "676",
+                "747",
+                "772",
+                "819",
+                "859",
+                "899",
+                "940",
+                "968",
+                "996"
+             ],
+             "y":[
+                975.0,
+                975.0,
+                976.0,
+                988.0,
+                1011.0,
+                1035.0,
+                1051.0,
+                1049.0,
+                1051.0,
+                1052.0,
+                1033.0,
+                989.0,
+                964.0,
+                934.0
+             ]
+          },
+          "8":{
+             "type":"transfer",
+             "mode":"transfer of transport",
+             "info":{
+                "code":"",
+                "duration":3.0,
+                "departure_date_time":"20220712T195100",
+                "arrival_date_time":"20220712T195400",
+                "from":"Daumesnil",
+                "to":"Daumesnil",
+                "stops":[
+                   
+                ]
+             }
+          },
+          "9":{
+             "type":"waiting",
+             "mode":"waiting",
+             "info":{
+                "code":"",
+                "duration":3.0,
+                "departure_date_time":"20220712T195400",
+                "arrival_date_time":"20220712T195700",
+                "from":"",
+                "to":"",
+                "stops":[
+                   
+                ]
+             }
+          },
+          "10":{
+             "type":"public_transport",
+             "mode":"Métro",
+             "info":{
+                "code":"8",
+                "duration":2.0,
+                "departure_date_time":"20220712T195700",
+                "arrival_date_time":"20220712T195900",
+                "from":"Daumesnil",
+                "to":"Reuilly - Diderot",
+                "stops":[
+                   "Daumesnil",
+                   "Montgallet",
+                   "Reuilly - Diderot"
+                ]
+             },
+             "x":[
+                "936",
+                "966",
+                "997"
+             ],
+             "y":[
+                874.0,
+                904.0,
+                934.0
+             ]
+          },
+          "11":{
+             "type":"street_network",
+             "mode":"walking",
+             "info":{
+                "code":"",
+                "duration":4.033333333333333,
+                "departure_date_time":"20220712T195900",
+                "arrival_date_time":"20220712T200302",
+                "from":"Reuilly - Diderot",
+                "to":"242 Rue du Faubourg Saint-Antoine",
+                "stops":[
+                   
+                ]
+             }
+          }
+       }
+    }
+ }
