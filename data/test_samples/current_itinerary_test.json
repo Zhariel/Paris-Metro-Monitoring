@@ -1,0 +1,77 @@
+{
+    "0":{
+       "metadata":{
+          "nb_transfers":1,
+          "walking_duration":1826,
+          "arrival_date_time":"20220712T195649",
+          "departure_date_time":"20220712T184923",
+          "fare_value":"500.0",
+          "co2_emission_value":63.4268,
+          "type":"best",
+          "duration":67.43333333333334,
+          "nb_sections":6
+       },
+       "sections":{
+          "0":{
+             "type":"public_transport",
+             "mode":"Métro",
+             "info":{
+                "code":"8",
+                "duration":19.0,
+                "departure_date_time":"20220712T193300",
+                "arrival_date_time":"20220712T195200",
+                "from":"Invalides",
+                "to":"Reuilly - Diderot",
+                "stops":[
+                   "Invalides",
+                   "Concorde",
+                   "Madeleine",
+                   "Opéra",
+                   "Richelieu - Drouot",
+                   "Grands Boulevards",
+                   "Bonne Nouvelle",
+                   "Strasbourg - Saint-Denis",
+                   "République",
+                   "Filles du Calvaire",
+                   "Saint-Sébastien - Froissart",
+                   "Chemin Vert",
+                   "Bastille",
+                   "Ledru-Rollin",
+                   "Faidherbe - Chaligny",
+                   "Reuilly - Diderot"
+                ]
+             },
+             "x":[
+                "417",
+                "434",
+                "445",
+                "609",
+                "655",
+                "716",
+                "749",
+                "818",
+                "819",
+                "824",
+                "854",
+                "909",
+                "936"
+             ],
+             "y":[
+                775.0,
+                723.0,
+                684.0,
+                623.0,
+                624.0,
+                625.0,
+                624.0,
+                696.0,
+                762.0,
+                795.0,
+                824.0,
+                848.0,
+                874.0
+             ]
+          }
+       }
+    }
+ }
