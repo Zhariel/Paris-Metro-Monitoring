@@ -33,3 +33,21 @@ resource "aws_instance" "server" {
 provider "aws" {
   region = var.aws_region
 }
+
+resource "aws_instance" "web" {
+  connection {
+    type     = "ssh"
+    user     = "root"
+    password = var.root_password
+    host     = self.public_ip
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "git clone https://github.com/Zhariel/Paris-Metro-Monitoring.git",
+      "cd Paris-Metro-Monitoring/app/frontend",
+      "npm install",
+      "npm start"
+    ]
+  }
+}
