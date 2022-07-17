@@ -176,31 +176,27 @@ def format_itineraries(journeys_list):
 
 def get_disruptions(lis):
     
-    head = 'status', 'category', 'severity_priority', 'severity_name', 'severity_effect', 'begin_date', 'end_date', 'impact_id', 'messages', 'updated_at', 'impacted_objects', 'id', 'cause'
-    column_names = ['status', 'category', 'severity_priority', 'severity_name', 'severity_effect', 'begin_date', 'end_date', 'impact_id', 'messages', 'updated_at', 'impacted_objects', 'id', 'cause']
+    column_names = ['status', 'category', 'severity_priority', 'severity_name', 'severity_effect', 'begin_date', 'end_date', 'duration', 'id', 'cause', 'line', 'station',]
     df_disruptions = pd.DataFrame(columns=column_names)
     
     for i in lis:
-        messages = ""
-        for j in i["messages"]:
-            messages = messages + " / " + j["text"]
         for j in i["application_periods"]:
-            rawdata = []
-            rawdata.append(i["status"])
-            rawdata.append(i["category"])
-            rawdata.append(i["severity"]["priority"])
-            rawdata.append(i["severity"]["name"])
-            rawdata.append(i["severity"]["effect"])
-            rawdata.append(j["begin"])
-            rawdata.append(j["end"])
-            rawdata.append(i["impact_id"])
-            rawdata.append(messages)
-            rawdata.append(i["updated_at"])
-            rawdata.append(i["impacted_objects"][0]["pt_object"]["name"])
-            rawdata.append(i["id"])
-            rawdata.append(i["cause"])
             
-            df_2 = {'status' : rawdata[0], 'category' : rawdata[1], 'severity_priority' : rawdata[2], 'severity_name' : rawdata[3], 'severity_effect' : rawdata[4], 'begin_date' : rawdata[5], 'end_date' : rawdata[6], 'impact_id' : rawdata[7], 'messages' : rawdata[8], 'updated_at' : rawdata[9], 'impacted_objects' : rawdata[10], 'id' : rawdata[11], 'cause' : rawdata[12]}
+            df_2 = {
+                'status' : i["status"], 
+                'category' : i["category"], 
+                'severity_priority' : i["severity"]["priority"], 
+                'severity_name' : i["severity"]["name"], 
+                'severity_effect' : i["severity"]["effect"], 
+                'begin_date' : j["begin"], 
+                'end_date' : j["end"], 
+                'duration' : 0, # to refacto 
+                'id' : i["id"], 
+                'cause' : i["impacted objects"],
+                'line' : i["impacted_objects"][0]["pt_object"]["line"]["code"],
+                'station' : i["impacted_objects"][0]["pt_object"]["line"]["name"]
+            }
+
             df_disruptions = df_disruptions.append(df_2, ignore_index = True)
             
     return df_disruptions
