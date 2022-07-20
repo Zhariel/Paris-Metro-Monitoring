@@ -1,5 +1,5 @@
-from api.settings import HEADERS, URL_BASE, LINES_ENDPOINT, JOURNEYS_ENDPOINT
-from api.split_data import get_places, format_itineraries
+from settings import HEADERS, URL_BASE, LINES_ENDPOINT, JOURNEYS_ENDPOINT
+from split_data import get_places, format_itineraries
 import requests
 
 

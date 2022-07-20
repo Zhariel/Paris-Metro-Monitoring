@@ -68,11 +68,10 @@ if __name__ == "__main__":
     # import random
     # print(weighted_lines)
 
-    predict_disruptions = 'predict_disruptions'
+    predict_disruptions = 'predict_disruption'
     predict_duration = 'predict_duration'
     predict_priority = 'predict_priority'
     predict_cause = 'predict_cause'
-
 
     d = DisruptionGenerator()
     headers, disrupt = d.generate_disruptions()
@@ -81,37 +80,53 @@ if __name__ == "__main__":
 
     print("- - - IS DISRUPTED - - -")
     diskeys, is_disrupted = d.gen_xy_predict_disruption(disrupt)
-    print(is_disrupted[1])
-    # for isdr in is_disrupted:
-    #     print(isdr)
     print(diskeys)
-    #
-    # print("- - - DURATION - - -")
+    print(is_disrupted[0])
+
+    print("- - - DURATION - - -")
     durkeys, durations = d.gen_xy_predict_duration(disrupt)
-    # for dur in durations:
-    #     print(dur)
-    #
-    # print("- - - PRIO - - -")
+    print(durkeys)
+    print(durations[0])
+
+    print("- - - PRIO - - -")
     prikeys, prios = d.gen_xy_predict_priority(disrupt)
-    # for pri in prios:
-    #     print(pri)
-    #
-    # print("- - - CAUSE - - -")
+    print(prikeys)
+    print(prios[0])
+
+    print("- - - CAUSE - - -")
     caukeys, cause = d.gen_xy_predict_cause(disrupt)
-    # for cau in cause:
-    #     print(cau)
+    print(caukeys)
+    print(cause[0])
 
 
     from sqlclient import RDSClient
     rclient = RDSClient()
 
     rclient.create_db()
-    rclient.create_table_generic(predict_disruptions, diskeys)
-    rclient.create_table_generic(predict_duration, durkeys)
-    rclient.create_table_generic(predict_priority, prikeys)
-    rclient.create_table_generic(predict_cause, caukeys)
+    # rclient.create_table_generic(predict_disruptions, diskeys)
+    # rclient.create_table_generic(predict_duration, durkeys)
+    # rclient.create_table_generic(predict_priority, prikeys)
+    # rclient.create_table_generic(predict_cause, caukeys)
     print(rclient.tables)
     print()
 
-    rclient.insert_dict(predict_disruptions, is_disrupted[1])
+    ################################
+    ###### INSERT INTO TABLES ######
+    ################################
+
+    # print(f'Inserting {predict_disruptions}.')
+    # for data_dict in is_disrupted:
+    #     rclient.insert_dict(predict_disruptions, data_dict)
+    #
+    # print(f'Inserting {predict_duration}.')
+    # for data_dict in durations:
+    #     rclient.insert_dict(predict_duration, data_dict)
+    #
+    # print(f'Inserting {predict_priority}.')
+    # for data_dict in prios:
+    #     rclient.insert_dict(predict_priority, data_dict)
+    #
+    # print(f'Inserting {predict_cause}.')
+    # for data_dict in cause:
+    #     rclient.insert_dict(predict_cause, data_dict)
 

@@ -10,9 +10,9 @@ class DisruptionGenerator:
                          ['perturbation', [15, 15, 5, 10, 10, 5, 5, 0, 25, 10], [20, 180]],
                         ['information', [0, 0, 10, 0, 0, 20, 0, 70, 0, 0], [0, 0]]]
         self.prio_weights = self.flatten([['bloquant']*5, ['perturbation']*14, ['information']])
-        self.years = [x for x in range(2021, 2022)]
+        self.years = [x for x in range(2017, 2022)]
         # self.months = range(1, 13)
-        self.months = range(1, 2)
+        self.months = range(1, 13)
         self.months_max_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
         self.cause = [
             "Travaux",

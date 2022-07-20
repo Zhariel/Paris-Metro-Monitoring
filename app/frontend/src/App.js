@@ -113,13 +113,6 @@ function App() {
     }
   }
 
-  const Al = (event) => {
-    event.preventDefault();
-    useEffect(() => {
-      setData("test")
-    }, "")
-  }
-
   return (
   <div id="main">
     <Sketch setup={setup} draw={draw}/>
@@ -127,15 +120,24 @@ function App() {
     <div id='userselect'>
       <div class='forms'>
         <Form class='address_form'/>
-        {/* <form onSubmit={Al}>
-          <div class="flexrow">
-            <div class="flexcolumn">
-              <input type='text' id='departure' class='inputbox' placeholder='Departure'/>
-              <input type='text' id='arrival' class='inputbox' placeholder='Arrival'/>
-              <button class='btn btnspecs'>Send</button>
-            </div>
-          </div>
-        </form> */}
+      </div>
+      <div>
+        <table class="styled-table">
+          <tr class="styled-table">
+            <th>Date/Time</th>
+            <th>Disruption</th>
+            <th>Duration</th>
+            <th>Priority</th>
+            <th>Cause</th>
+          </tr>
+          <tr>
+            <td>20/07/2022 8h34</td>
+            <td>70%</td>
+            <td>25m</td>
+            <td>Perturbation</td>
+            <td>Baggage abandonné</td>
+          </tr>
+        </table>
       </div>
     </div>
   </div>
