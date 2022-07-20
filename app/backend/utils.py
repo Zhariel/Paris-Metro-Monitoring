@@ -1,7 +1,17 @@
 import pandas as pd
+from api import client
+from api.split_data import get_disruptions
 import json
 import os
 
+from sqlclient import RDSClient
+from disruption_generator import DisruptionGenerator
+
+def request_disruptions():
+    response = client.request_navitia("Metro")
+    print(response["disruptions"])
+    df_disruptions = get_disruptions(response["disruptions"])
+    return df_disruptions
 
 def add_coordinates(journeys: dict):
     '''
@@ -49,4 +59,59 @@ def generate_xy(all_lines_list: list, all_stops_list: list, selected_stops: list
     return {"x": chosen_x_stations, "y": chosen_y_stations}, {"x": chosen_x_angles, "y": chosen_y_angles}
 
 if __name__ == "__main__":
-    pass
+    # pd.set_option('display.max_columns', None)
+    # disruptions = request_disruptions()
+    # disruptions.to_csv(os.path.join('data', 'navitia', 'metros', 'disruptions.csv'), index=False, sep=";")
+    # lines = zip(range(1, 15), [3, 3, 5, 5, 2, 2, 4, 5, 3, 4, 2, 4, 5, 3])
+    # weighted_lines = [[x[0]]*x[1] for x in lines]
+    # weighted_lines = [x for l in weighted_lines for x in l]
+    # import random
+    # print(weighted_lines)
+
+    predict_disruptions = 'predict_disruptions'
+    predict_duration = 'predict_duration'
+    predict_priority = 'predict_priority'
+    predict_cause = 'predict_cause'
+
+
+    d = DisruptionGenerator()
+    headers, disrupt = d.generate_disruptions()
+    for x in disrupt:
+        print(x)
+
+    print("- - - IS DISRUPTED - - -")
+    diskeys, is_disrupted = d.gen_xy_predict_disruption(disrupt)
+    print(is_disrupted[1])
+    # for isdr in is_disrupted:
+    #     print(isdr)
+    print(diskeys)
+    #
+    # print("- - - DURATION - - -")
+    durkeys, durations = d.gen_xy_predict_duration(disrupt)
+    # for dur in durations:
+    #     print(dur)
+    #
+    # print("- - - PRIO - - -")
+    prikeys, prios = d.gen_xy_predict_priority(disrupt)
+    # for pri in prios:
+    #     print(pri)
+    #
+    # print("- - - CAUSE - - -")
+    caukeys, cause = d.gen_xy_predict_cause(disrupt)
+    # for cau in cause:
+    #     print(cau)
+
+
+    from sqlclient import RDSClient
+    rclient = RDSClient()
+
+    rclient.create_db()
+    rclient.create_table_generic(predict_disruptions, diskeys)
+    rclient.create_table_generic(predict_duration, durkeys)
+    rclient.create_table_generic(predict_priority, prikeys)
+    rclient.create_table_generic(predict_cause, caukeys)
+    print(rclient.tables)
+    print()
+
+    rclient.insert_dict(predict_disruptions, is_disrupted[1])
+

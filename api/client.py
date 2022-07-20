@@ -1,7 +1,7 @@
 import json
 # from api import *
 from api.utils import join_path
-from api.settings import *
+from api.settings import HEADERS, URL_BASE, JOURNEYS_ENDPOINT, LINES_ENDPOINT
 from api.split_data import get_disruptions, get_lines
 import pandas as pd
 import requests
@@ -17,18 +17,21 @@ class NavitiaClient:
         print()
         print(self.lines_endp)
 
-    def factor_data(self, transport_mode):
+    def request_navitia(self, transport_mode):
         uurl = self.lines_endp.replace("sample", transport_mode)
-        print()
-        print(uurl)
-
         response = requests.get(uurl, headers=self.headers).json()
-        disruptions = response["disruptions"]
-        lines = response["lines"]
-        df_disruptions = get_disruptions(disruptions)
-        df_lines = get_lines(lines)
+        
+        return response
+
+
+    def factor_data(self, transport_mode):
+        response = self.request_navitia(transport_mode)
+
+        df_disruptions = get_disruptions(response["disruptions"])
+        df_lines = get_lines(response["lines"])
 
         return df_disruptions, df_lines
+
 
     def df_to_csv(self, df_disruptions, df_lines, disruptions_file, lines_file):
         path = join_path("..", "data", "navitia")

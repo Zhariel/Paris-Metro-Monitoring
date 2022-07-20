@@ -2,6 +2,7 @@ import json
 import requests
 import csv
 import pandas as pd
+from datetime import datetime
 import io
 
 
@@ -57,7 +58,7 @@ def create_sections_json(lis):
                 i["to"]["name"],
                 "stops": stops
             }
-            
+
         elif i["type"] == "street_network" or i["type"] == "crow_fly":
             mode = "walking"
             info = extract_info_street(i)
@@ -108,7 +109,7 @@ def extract_info_street(section):
                 "address" in section["from"]) else section["from"]["name"],
         "to": section["to"]["stop_point"]["name"] if ("stop_point" in section["to"]) else section["to"]["stop_area"][
             "name"] if ("stop_area" in section["to"]) else section["to"]["address"]["name"] if (
-                    "address" in section["to"]) else
+                "address" in section["to"]) else
         section["to"]["name"],
         "stops": []
     }
@@ -144,6 +145,7 @@ def format_itineraries(journeys_list):
         count += 1
     return journeys_with_metadata
 
+
 # def format_itinararies(lis):
 #     # The unit of fare value is Euro
 #     # The unit of CO2 emission is gEC
@@ -174,31 +176,43 @@ def format_itineraries(journeys_list):
 #
 #     return df
 
-def get_disruptions(lis):
-    
-    column_names = ['status', 'category', 'severity_priority', 'severity_name', 'severity_effect', 'begin_date', 'end_date', 'duration', 'id', 'cause', 'line', 'station',]
+def get_disruptions(disruptions):
+    column_names = ['status', 'category', 'severity_priority', 'severity_name', 'severity_effect',
+                    'start_year', 'start_month', 'start_day', 'start_hour', 'start_minute', 'start_weekday',
+                    'minute_duration', 'cause', 'line', 'station', ]
     df_disruptions = pd.DataFrame(columns=column_names)
-    
-    for i in lis:
-        for j in i["application_periods"]:
-            
-            df_2 = {
-                'status' : i["status"], 
-                'category' : i["category"], 
-                'severity_priority' : i["severity"]["priority"], 
-                'severity_name' : i["severity"]["name"], 
-                'severity_effect' : i["severity"]["effect"], 
-                'begin_date' : j["begin"], 
-                'end_date' : j["end"], 
-                'duration' : 0, # to refacto 
-                'id' : i["id"], 
-                'cause' : i["impacted objects"],
-                'line' : i["impacted_objects"][0]["pt_object"]["line"]["code"],
-                'station' : i["impacted_objects"][0]["pt_object"]["line"]["name"]
-            }
 
-            df_disruptions = df_disruptions.append(df_2, ignore_index = True)
-            
+    for dis in disruptions:
+        print(dis)
+        for period in dis["application_periods"]:
+            try:
+                affected_stations = dis["impacted_objects"][0]["pt_object"]["line"]["name"]
+                affected_list = affected_stations.split(' - ')
+                for station in affected_list:
+                    start_date = datetime.strptime(period["begin"], '%Y%m%dT%H%M%S')
+                    end_date = datetime.strptime(period["end"], '%Y%m%dT%H%M%S')
+                    df_2 = {
+                        'status': dis["status"],
+                        'category': dis["category"],
+                        'severity_priority': dis["severity"]["priority"],
+                        'severity_name': dis["severity"]["name"],
+                        'severity_effect': dis["severity"]["effect"],
+                        'start_year': start_date.year,
+                        'start_month': start_date.month,
+                        'start_day': start_date.day,
+                        'start_hour': start_date.hour,
+                        'start_minute': start_date.minute,
+                        'start_weekday': start_date.weekday(),
+                        'minute_duration': (start_date - end_date).seconds // 60,
+                        'cause': dis["cause"],
+                        'line': dis["impacted_objects"][0]["pt_object"]["line"]["code"],
+                        'station': station
+                    }
+
+                    df_disruptions = df_disruptions.append(df_2, ignore_index=True)
+            except KeyError:
+                continue
+
     return df_disruptions
 
 

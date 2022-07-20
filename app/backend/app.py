@@ -4,7 +4,7 @@ import json
 import os
 
 # from api.client import NavitiaClient
-from app.backend.utils import add_coordinates
+from utils import add_coordinates
 from api.itinerary import Itinerary
 from flask import Flask
 
