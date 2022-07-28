@@ -2,6 +2,8 @@ import random
 import datetime
 from datetime import datetime, timedelta
 
+_START_YEAR = 2012
+_END_YEAR = 2022
 
 class DisruptionGenerator:
     def __init__(self):
@@ -10,7 +12,7 @@ class DisruptionGenerator:
                          ['perturbation', [15, 15, 5, 10, 10, 5, 5, 0, 25, 10], [20, 180]],
                         ['information', [0, 0, 10, 0, 0, 20, 0, 70, 0, 0], [0, 0]]]
         self.prio_weights = self.flatten([['bloquant']*5, ['perturbation']*14, ['information']])
-        self.years = [x for x in range(2017, 2022)]
+        self.years = [x for x in range(_START_YEAR, _END_YEAR)]
         # self.months = range(1, 13)
         self.months = range(1, 13)
         self.months_max_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
@@ -78,13 +80,12 @@ class DisruptionGenerator:
     def gen_xy_predict_disruption(self, disruptions):
         # x: start_time, line
         # y: disruption
-        keys = ['year', 'month', 'day', 'hour', 'minute'] + [str(x) for x in range(1, 15)]
+        keys = ['is_disrupted', 'year', 'month', 'day', 'hour', 'minute'] + [str(x) for x in range(1, 15)]
 
         entries = []
         for dis in disruptions:
-            entry = [dis[2].year, dis[2].month, dis[2].day, dis[2].hour, dis[2].minute] + \
-                [1 if x == dis[1] else 0 for x in range(1, 15)] + \
-                [dis[0]]
+            entry = [dis[0], dis[2].year, dis[2].month, dis[2].day, dis[2].hour, dis[2].minute] + \
+                [1 if x == dis[1] else 0 for x in range(1, 15)]
 
             entries.append(dict(zip(keys, entry)))
 
@@ -102,14 +103,17 @@ class DisruptionGenerator:
             entry = [dis[2].year, dis[2].month, dis[2].day, dis[2].hour, dis[2].minute, dis[3]] + \
                 [1 if x == dis[1] else 0 for x in range(1, 15)]
 
-            entries.append(dict(zip(keys, entry)))
+            if dict[0]:
+                entries.append(dict(zip(keys, entry)))
 
         return keys, entries
 
     def gen_xy_predict_priority(self, disruptions):
         # x: start_time, line
         # y: priority
-        keys = ['year', 'month', 'day', 'hour', 'minute', 'duration'] + [str(x) for x in range(1, 15)]
+        keys = ['year', 'month', 'day', 'hour', 'minute', 'duration'] + \
+               [str(x) for x in range(1, 15)] + \
+               ['priority']
 
         entries = []
         for dis in disruptions:
@@ -119,7 +123,8 @@ class DisruptionGenerator:
                 [1 if x == dis[1] else 0 for x in range(1, 15)] + \
                 [dis[5]]
 
-            entries.append(dict(zip(keys, entry)))
+            if dict[0]:
+                entries.append(dict(zip(keys, entry)))
 
         return keys, entries
 
@@ -141,7 +146,8 @@ class DisruptionGenerator:
                 [1 if x == dis[5] else 0 for x in prio_list] + \
                 [dis[4]]
 
-            entries.append(dict(zip(keys, entry)))
+            if dict[0]:
+                entries.append(dict(zip(keys, entry)))
 
         return keys, entries
 

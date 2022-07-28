@@ -1,4 +1,5 @@
 import pandas as pd
+import datetime
 from api import client
 from api.split_data import get_disruptions
 import json
@@ -67,7 +68,7 @@ if __name__ == "__main__":
     # weighted_lines = [x for l in weighted_lines for x in l]
     # import random
     # print(weighted_lines)
-
+    
     predict_disruptions = 'predict_disruption'
     predict_duration = 'predict_duration'
     predict_priority = 'predict_priority'
@@ -80,53 +81,61 @@ if __name__ == "__main__":
 
     print("- - - IS DISRUPTED - - -")
     diskeys, is_disrupted = d.gen_xy_predict_disruption(disrupt)
+    print(len(is_disrupted))
     print(diskeys)
     print(is_disrupted[0])
 
     print("- - - DURATION - - -")
     durkeys, durations = d.gen_xy_predict_duration(disrupt)
+    print(len(durations))
     print(durkeys)
     print(durations[0])
 
     print("- - - PRIO - - -")
     prikeys, prios = d.gen_xy_predict_priority(disrupt)
+    print(len(prios))
     print(prikeys)
     print(prios[0])
 
     print("- - - CAUSE - - -")
     caukeys, cause = d.gen_xy_predict_cause(disrupt)
+    print(len(cause))
     print(caukeys)
     print(cause[0])
 
 
-    from sqlclient import RDSClient
-    rclient = RDSClient()
+    # from sqlclient import RDSClient
+    # rclient = RDSClient()
 
-    rclient.create_db()
+    # rclient.create_db()
     # rclient.create_table_generic(predict_disruptions, diskeys)
     # rclient.create_table_generic(predict_duration, durkeys)
     # rclient.create_table_generic(predict_priority, prikeys)
     # rclient.create_table_generic(predict_cause, caukeys)
-    print(rclient.tables)
-    print()
+    # print(rclient.tables)
+    # print()
 
     ################################
     ###### INSERT INTO TABLES ######
     ################################
 
     # print(f'Inserting {predict_disruptions}.')
+    # print(datetime.datetime.now())
     # for data_dict in is_disrupted:
     #     rclient.insert_dict(predict_disruptions, data_dict)
     #
     # print(f'Inserting {predict_duration}.')
+    # print(datetime.datetime.now())
     # for data_dict in durations:
     #     rclient.insert_dict(predict_duration, data_dict)
     #
     # print(f'Inserting {predict_priority}.')
+    # print(datetime.datetime.now())
     # for data_dict in prios:
     #     rclient.insert_dict(predict_priority, data_dict)
     #
     # print(f'Inserting {predict_cause}.')
+    # print(datetime.datetime.now())
     # for data_dict in cause:
     #     rclient.insert_dict(predict_cause, data_dict)
 
